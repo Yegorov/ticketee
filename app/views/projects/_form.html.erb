@@ -14,6 +14,6 @@
 -->
 <%= simple_form_for(project) do |f| %>
   <%= f.input :name %>
-  <%= f.input :description %>
+  <%= f.input :description, as: :ckeditor, input_html: { ckeditor: { toolbar: 'Full' } } %>
   <%= f.button :submit, class: "btn-primary" %>
 <% end %>

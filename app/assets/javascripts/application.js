@@ -15,4 +15,5 @@
 //= require bootstrap-sprockets
 // /=/= require bootstrap/alert
 //= require turbolinks
+//= require ckeditor/init
 //= require_tree .
