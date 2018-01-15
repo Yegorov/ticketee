@@ -11,6 +11,6 @@
 <div id="projects">
   <% @projects.each do |project| %>
     <h2><%= link_to project.name, project %></h2>
-    <p><%= project.description.html_safe %></p>
+    <p><%= (project.description || "").html_safe %></p>
   <% end %>
 </div>
