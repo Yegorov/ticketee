@@ -26,5 +26,8 @@
     </tr>
   </table>
 
-  <%= simple_format(@ticket.description) %>
+  <%= 
+    #simple_format(@ticket.description) 
+  %>
+  <%= (@ticket.description || "").html_safe %>
 </div>
