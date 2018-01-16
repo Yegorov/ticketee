@@ -1,1 +1,2 @@
---require spec_helper
+--require spec_helper --color --format documentation
+# https://relishapp.com/rspec/rspec-core/v/3-7/docs/configuration/read-command-line-configuration-options-from-files
