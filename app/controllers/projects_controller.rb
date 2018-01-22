@@ -12,11 +12,13 @@ class ProjectsController < ApplicationController
 
   def edit
     #@project = Project.find(params[:id])
+    authorize @project, :update?
   end
 
   def update
     #@project = Project.find(params[:id])
     #@project.update_attributes(project_params)
+    authorize @project, :update?
     @project.update(project_params)
     if @project.save
       flash[:notice] = "Project has been updated."
