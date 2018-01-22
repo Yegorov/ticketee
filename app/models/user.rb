@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :roles
+
   scope :excluding_archived, ->(){ where(archived_at: nil) }
 
   def active_for_authentication?
@@ -19,5 +21,9 @@ class User < ActiveRecord::Base
 
   def archive
     self.update(archived_at: Time.now)
+  end
+
+  def role_on(project)
+    roles.find_by(project_id: project).try(:name)
   end
 end
