@@ -24,6 +24,6 @@ class User < ActiveRecord::Base
   end
 
   def role_on(project)
-    roles.find_by(project_id: project).try(:name)
+    roles.find_by(project_id: project).try(:role)
   end
 end

@@ -8,7 +8,7 @@
   </header>
 
   <table class="roles">
-    <%= projects.each do |project| %>
+    <% projects.each do |project| %>
       <tr>
         <th><%= label_tag dom_id(project), project.name %></th>
         <td>
