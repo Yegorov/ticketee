@@ -59,4 +59,7 @@ end
 group :test do
   gem 'capybara', '~> 2.4'
   gem 'factory_girl_rails', '~> 4.5'
+  gem 'selenium-webdriver', '~> 3.8'
+  #gem 'poltergeist'
+  gem "database_cleaner", '~> 1.4'
 end
