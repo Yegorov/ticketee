@@ -35,4 +35,15 @@
     #simple_format(@ticket.description) 
   %>
   <%= (@ticket.description || "").html_safe %>
+
+  <% if @ticket.attachment.present? %>
+    <h4>Attachment</h4>
+      <div class="attachment">
+        <p>
+          <%= link_to File.basename(@ticket.attachment.url),
+              @ticket.attachment.url %>
+          (<%= number_to_human_size(@ticket.attachment.size) %>)
+        </p>
+      </div>
+  <% end %>
 </div>
