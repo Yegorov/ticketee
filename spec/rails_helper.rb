@@ -21,6 +21,7 @@ require "pundit/rspec"
 # require only the support files necessary.
 #
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+require 'support/database_cleaning'
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -57,4 +58,13 @@ RSpec.configure do |config|
 
   config.include Warden::Test::Helpers, type: :feature
   config.after(type: :feature) { Warden.test_reset! }
+
+end
+
+def fill_in_ckeditor(locator, opts)
+  content = opts.fetch(:with).to_json # convert to a safe javascript string
+  page.execute_script <<-SCRIPT
+    CKEDITOR.instances['#{locator}'].setData(#{content});
+    $('textarea##{locator}').text(#{content});
+  SCRIPT
 end
