@@ -2,8 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
+$(document).on 'turbolinks:load', ->
   $("#add_file").on "ajax:success", (event, data) ->
     $("#attachments").append(data)
-    console.log(data)
     $(this).data "params", { index: $("#attachments div.file").length }
