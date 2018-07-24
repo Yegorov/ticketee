@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       flash[:notice] = "Comment has been created."
-      refirect_to [@ticket.project, @ticket]
+      redirect_to [@ticket.project, @ticket]
     else
       flash.now[:alert] = "Comment has not been created."
       @project = @ticket.project
