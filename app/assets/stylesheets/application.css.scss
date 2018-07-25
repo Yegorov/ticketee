@@ -110,3 +110,7 @@ ul.actions {
   @extend .list-unstyled;
   @extend .list-inline;
 }
+
+#tickets li, #states li {
+  padding-bottom: 10px;
+}
