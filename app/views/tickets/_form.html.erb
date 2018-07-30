@@ -1,6 +1,7 @@
 <%= simple_form_for([project, ticket]) do |f| %>
   <%= f.input :name %>
   <%= f.input :description, as: :ckeditor, input_html: { ckeditor: { toolbar: 'Full' } }  %>
+  <%= f.input :tag_names, label: "Tags" %>
 
   <h3>Attachments</h3>
     <div id="attachments">
