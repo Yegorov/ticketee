@@ -24,6 +24,11 @@ Rails.application.routes.draw do
   end
   resources :tickets, only: [:index, :show, :edit, :update] do
     resources :comments, only: [:create]
+    resources :tags, only: [] do
+      member do
+        delete :remove
+      end
+    end
   end
 
   resources :attachments, only: [:show, :new]
