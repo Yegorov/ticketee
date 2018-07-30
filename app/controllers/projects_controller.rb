@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
   def show
     #@project = Project.find(params[:id])
     authorize @project, :show?
+    @tickets = @project.tickets
   end
 
   def edit
@@ -36,7 +37,7 @@ class ProjectsController < ApplicationController
     flash[:alert] = "The project you were looking for could not be found."
     redirect_to projects_path
   end
-  
+
   def project_params
     params.require(:project).permit(:name, :description)
   end

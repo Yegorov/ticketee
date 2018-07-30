@@ -6,6 +6,14 @@
 
   <ul class="actions">
     <li>
+      <%= form_tag search_project_tickets_path(@project), method: :get,
+          class: "form-inline" do %>
+          <%= label_tag "search", "Search", class: "sr-only" %>
+          <%= text_field_tag "search", params[:search], class: "form-control" %>
+          <%= submit_tag "Search", class: "btn btn-default" %>
+        <% end %>
+    </li>
+    <li>
       <% if policy(@project).update? %>
         <%= link_to "Edit Project",
             edit_project_path(@project),
@@ -32,7 +40,7 @@
 <p><%= (@project.description || "").html_safe %></p>
 
 <ul id="tickets">
-  <% @project.tickets.each do |ticket| %>
+  <% @tickets.each do |ticket| %>
     <li>
       #<%= ticket.id %> -
       <%= link_to ticket.name, [@project, ticket] %>

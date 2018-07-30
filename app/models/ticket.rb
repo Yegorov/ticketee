@@ -15,6 +15,10 @@ class Ticket < ActiveRecord::Base
 
   attr_accessor :tag_names
 
+  searcher do
+    label :tag, from: :tags, field: "name"
+  end
+
   def tag_names=(names)
     @tag_names = names
     names.split.each do |name|
