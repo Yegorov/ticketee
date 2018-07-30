@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/autorization_helpers'
 
 RSpec.describe ProjectsController, type: :controller do
 
