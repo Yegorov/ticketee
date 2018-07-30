@@ -12,7 +12,7 @@ RSpec.feature "Users can comments on tickets" do
 
   before do
     login_as(user)
-    assign_role!(user, :editor, project)
+    assign_role!(user, :manager, project)
   end
 
 
@@ -57,6 +57,20 @@ RSpec.feature "Users can comments on tickets" do
     visit project_ticket_path(project, ticket)
 
     expect(page).not_to have_select "State"
+  end
+
+  scenario "when adding a new tag to a ticket" do
+    visit project_ticket_path(project, ticket)
+    expect(page).not_to have_content "bug"
+
+    fill_in "Text", with: "Adding the bug tag"
+    fill_in "Tags", with: "bug"
+    click_button "Create Comment"
+
+    expect(page).to have_content "Comment has been created."
+    within("#ticket #tags") do
+      expect(page).to have_content "bug"
+    end
   end
 
 end
