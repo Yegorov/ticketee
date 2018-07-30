@@ -3,6 +3,7 @@ require "support/authorization_helpers"
 
 RSpec.feature "Users can create new tickets" do
   let(:user) { FactoryGirl.create(:user) }
+  let!(:state) { FactoryGirl.create :state, name: "New", default: true }
 
   before do
     login_as(user)
@@ -20,6 +21,7 @@ RSpec.feature "Users can create new tickets" do
     click_button "Create Ticket"
 
     expect(page).to have_content "Ticket has been created."
+    expect(page).to have_content "State: New"
     within("#ticket") do
       expect(page).to have_content "Author: #{user.email}"
     end
