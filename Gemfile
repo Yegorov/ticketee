@@ -65,4 +65,5 @@ group :test do
   gem 'selenium-webdriver', '~> 3.8'
   #gem 'poltergeist'
   gem "database_cleaner", '~> 1.4'
+  gem "email_spec", "~> 1.6.0"
 end
