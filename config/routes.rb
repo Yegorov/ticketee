@@ -24,6 +24,9 @@ Rails.application.routes.draw do
       collection do
         get :search
       end
+      member do
+        post :watch
+      end
     end
   end
   resources :tickets, only: [:index, :show, :edit, :update] do
