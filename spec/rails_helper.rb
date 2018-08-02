@@ -61,6 +61,7 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
 
+
 end
 
 def fill_in_ckeditor(locator, opts)
