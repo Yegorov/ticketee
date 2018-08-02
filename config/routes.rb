@@ -1,4 +1,9 @@
+require "heartbeat/application"
+
 Rails.application.routes.draw do
+
+  mount Heartbeat::Application, at: "/heartbeat"
+
   namespace :admin do
     root "application#index"
     get 'application/index'
@@ -45,6 +50,8 @@ Rails.application.routes.draw do
       resources :tickets
     end
   end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
