@@ -1,31 +1,28 @@
-class API::TicketsController < ApplicationController
-  attr_reader :current_user
-
-  before_action :authenticate_user
+class API::TicketsController < API::ApplicationController
   before_action :set_project
-  rescue_from Pundit::NotAuthorizedError, with: :not_authorized
-
 
   def show
     @ticket = @project.tickets.find(params[:id])
     authorize @ticket, :show?
 
-    render json: @ticket, root: true, adapter: :json
+    render json: @ticket, adapter: :json
+  end
+
+  def create
+    @ticket = @project.tickets.build(ticket_params)
+    authorize @ticket, :create?
+    if @ticket.save
+      render json: @ticket, status: 201
+    else
+      render json: { errors: @ticket.errors.full_messages }, status: 422
+    end
   end
 
   private
-
+  def ticket_params
+    params.require(:ticket).permit(:name, :description)
+  end
   def set_project
     @project = Project.find(params[:project_id])
-  end
-
-  def not_authorized
-    redirect_to root_path, alert: "You aren't allowed to do that."
-  end
-
-  def authenticate_user
-    authenticate_with_http_token do |token|
-      @current_user = User.find_by(api_key: token)
-    end
   end
 end
