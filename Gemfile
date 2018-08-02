@@ -38,6 +38,7 @@ gem "active_model_serializers", "~> 0.9.3"
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+gem "sinatra"
 gem 'puma', '~> 3.12.0'
 
 # Use Capistrano for deployment
