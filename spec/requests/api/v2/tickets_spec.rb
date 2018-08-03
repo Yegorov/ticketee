@@ -27,4 +27,24 @@ RSpec.describe API::V2::Tickets do
       expect(response.body).to eq json
     end
   end
+
+  context "unsuccessful requests" do
+    it "doesn't allow requests that don't pass throught an API key" do
+      get url
+      expect(response.status).to eq 401
+      expect(response.body).to include "Unauthenticated"
+    end
+
+    it "doesn't allow requests that pass an invalid API key" do
+      get url, {}, { "HTTP_AUTHORIZATION" => "Token token=notavalidkey" }
+      expect(response.status).to eql 401
+      expect(response.body).to include "Unauthenticated"
+    end
+
+    it "doesn't allow access to a ticket that the user doesn't have permission to read" do
+      project.roles.delete_all
+      get url, {}, headers
+      expect(response.status).to eq 404
+    end
+  end
 end

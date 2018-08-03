@@ -13,6 +13,9 @@ module API
 
       get "/:id" do
         ticket = @project.tickets.find(params[:id])
+        unless TicketPolicy.new(@user, ticket).show?
+          halt 404, "The ticket you were looking for could not be found."
+        end
         TicketSerializer.new(ticket).to_json
       end
 
@@ -31,8 +34,15 @@ module API
         if env["HTTP_AUTHORIZATION"].present?
           auth_token = /Token token=(.*)/.match(env["HTTP_AUTHORIZATION"])[1]
 
-          User.find_by!(api_key: auth_token)
+          @user = User.find_by(api_key: auth_token)
+          return @user if @user.present?
         end
+
+        unauthenticated!
+      end
+
+      def unauthenticated!
+        halt 401, { error: "Unauthenticated" }.to_json
       end
     end
   end
